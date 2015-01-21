@@ -4,12 +4,16 @@ include('config/db.php');
 
 include('includes/Login.php');
 
-$login = new login();
+$login = new Login();
 
-if($login->logged() === true){
- if($privileges===1)include "views/user.php";
- else include "views/admin.php";
-}
-else include "views/guest.php";
+if($login->getPrivileges()=== 1){
+ 		include "views/user.php";
+	}
+else if($login->getPrivileges()===2){
+ 		include "views/admin.php";
+	}
+else{
+	include "views/guest.php";
+	}
 
 ?>
