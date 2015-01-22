@@ -1,11 +1,11 @@
 <?php
 
 class Newuser{
-
+	//Creating a variable for database
 	private $db = null;
-
+	//Creating an array for echoing warnings
 	public $warnings = array();
-
+	//Creating an array for echoing messages
 	public $messages = array();
 
 	public function __construct(){
@@ -15,7 +15,7 @@ class Newuser{
 	}
 	
 	private function doUser(){
-		
+		//All these if and else if just check that form is providing information according to the parameters that we want
 		if(empty($_POST['user'])){
 			$this->messages[]='Empty user. Try again.';
 		}
@@ -47,13 +47,15 @@ class Newuser{
 		$this->db=new mysqli(SERVER,USER,PASSWORD,DATABASE);
 
 		if(!$this->db->connect_errno){
-
+			//We escape user and email variables. Protecting against html, java and mysql injections.
 			$user=$this->db->real_escape_string(strip_tags($_POST['user'],ENT_QUOTES));
 			$email=$this->db->real_escape_string(strip_tags($_POST['email'],ENT_QUOTES));
+			//creates a new password hash using a strong one-way hashing algorithm. This works only with php 5.5.0 or newer
 			$password=$_POST['password'];
 			$password_hash=password_hash($password,PASSWORD_DEFAULT);
+			//We set user privileges
 			$privileges=1;
-
+			//With this query we check if the user or email already exists in our database.
 			$sql="SELECT * FROM usuarios WHERE user='$user' OR email='$email';";
 			
 			$resource=$this->db->query($sql);
@@ -63,7 +65,7 @@ class Newuser{
 				$this->warnings[] = 'User or email already exists. Try another user and email.';
 			
 			}else{
-			
+			//If user and email doesnt exist in our database then we proceed to register
 			$sql="INSERT INTO usuarios values('$user','$password_hash','$email','$privileges');";
 			
 			$result=$this->db->query($sql);

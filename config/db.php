@@ -1,6 +1,6 @@
 <?php
 
-// Datos para acceso a base de datos
+// Necessary MYSQL data. Fill with your server data.
 
 define('SERVER','localhost');
 define('DATABASE','dblogin');
