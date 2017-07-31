@@ -11,7 +11,7 @@ faster validation but i want to keep it just php+html.
 
 Enjoy
 
-Made by Raúl Bustamante - admin@raulbustamante.me - http://www.raulbustamante.me
+Made by Raúl Bustamante - raulzero.01@gmail.com - http://www.raulbustamante.me
 
 
 
